@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Olá {{auth()->user()->name ?? ''}} 
                 </div>
 
                 <div class="links">

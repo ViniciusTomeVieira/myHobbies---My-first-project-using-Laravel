@@ -11,6 +11,99 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/jquery.mask.min.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+    <script>
+        function UserActionPost(){
+            var xhttp = new XMLHttpRequest();
+
+            var json = new Object();
+                json.nome =  $("#nome").val(),
+                json.cpf = $("#cpf").val(),
+                json.rg = $("#rg").val(),
+                json.nasc = $("#nasc").val(),
+                json.cep = $("#cep").val(),
+                json.rua = $("#rua").val(),
+                json.bairro = $("#bairro").val(),
+                json.cidade = $("#cidade").val(),
+                json.estado = $("#estado").val(),
+                json.numero = $("#numero").val()
+
+            var myJson = JSON.stringify(json);
+
+            var result = JSON.parse(JSON.stringify(json))
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert(this.responseText);
+                    }
+                };
+                xhttp.open("POST", "http://localhost:4000/clientes", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send(myJson)
+            }
+
+            function UserActionPut(idUser) {
+                var xhttp = new XMLHttpRequest();
+                var json = new Object();
+                    json.id = idUser,
+                    json.nome =  $("#nome").val(),
+                    json.cpf = $("#cpf").val(),
+                    json.rg = $("#rg").val(),
+                    json.nasc = $("#nasc").val(),
+                    json.cep = $("#cep").val(),
+                    json.rua = $("#rua").val(),
+                    json.bairro = $("#bairro").val(),
+                    json.cidade = $("#cidade").val(),
+                    json.estado = $("#estado").val(),
+                    json.numero = $("#numero").val()
+
+                var myJson = JSON.stringify(json);
+
+                var result = JSON.parse(JSON.stringify(json))
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            alert(this.responseText);
+                        }
+                    };
+                    xhttp.open("PUT", "http://localhost:4000/clientes/:{{$cliente ?? '' ?? ''->id}}", true);
+                    xhttp.setRequestHeader("Content-type", "application/json");
+                    xhttp.send(myJson)
+            }
+            function UserActionDelete(userId) {
+                var xhttp = new XMLHttpRequest();
+                var json = new Object();
+                    json.id = userId,
+                    json.nome =  $("#nome").val(),
+                    json.cpf = $("#cpf").val(),
+                    json.rg = $("#rg").val(),
+                    json.nasc = $("#nasc").val(),
+                    json.cep = $("#cep").val(),
+                    json.rua = $("#rua").val(),
+                    json.bairro = $("#bairro").val(),
+                    json.cidade = $("#cidade").val(),
+                    json.estado = $("#estado").val(),
+                    json.numero = $("#numero").val()
+
+                var myJson = JSON.stringify(json);
+
+                var result = JSON.parse(JSON.stringify(json))
+                    xhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            alert(this.responseText);
+                        }
+                    };
+                    xhttp.open("DELETE", "http://localhost:4000/clientes/:{{$cliente ?? '' ?? ''->id}}", true);
+                    xhttp.setRequestHeader("Content-type", "application/json");
+                    xhttp.send(myJson)
+            }
+            
+    $(document).ready(function(){           
+        $("#numero").click(function(){
+        })       
+});
+</script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -34,8 +127,9 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li><a class="nav-link{{Request::is('/') ? ' active ' : ''}}" href="/">Start</a></li>
-                        <li><a class="nav-link{{Request::is('info') ? ' active ' : ''}}" href="/info">Info</a></li>  
-                        <li><a class="nav-link{{Request::is('hobby*') ? ' active ' : ''}}" href="/hobby">Hobbies</a></li>  
+                        <!--<li><a class="nav-link{{Request::is('info') ? ' active ' : ''}}" href="/info">Info</a></li> -->  
+                        <!--<li><a class="nav-link{{Request::is('hobby*') ? ' active ' : ''}}" href="/hobby">Hobbies</a></li>  --> 
+                        <li><a class="nav-link{{Request::is('cliente*') ? ' active ' : ''}}" href="/cliente">Clientes</a></li>  
                     </ul>
 
                     <!-- Right Side Of Navbar -->

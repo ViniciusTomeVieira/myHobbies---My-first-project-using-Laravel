@@ -49,7 +49,7 @@ class HobbyController extends Controller
         $hobby->save();
 
         return $this->index()->with([
-            'message_success'=> "The hobby <b>".$hobby->name. "</b> was created." 
+            'message_success'=> "The hobby <b>".$hobby->name. "</b> was created."
         ]);
     }
 

@@ -52,9 +52,12 @@ routes.delete("/clientes/:id", async (req,res) =>{
   cliente.destroy()
 })
 
-routes.get("/clientes/:id", (req, res) => {})
-routes.put("/clientes/:id", (req, res) => {})
-routes.delete("/clientes/:id", (req, res) => {})
+routes.post("/clientes/search", async (req,res) =>{
+  console.log(req.body)
+  const cliente = await Cliente.findByPk(req.body.id)
+  return res.json(cliente)
+})
+
 
 
 

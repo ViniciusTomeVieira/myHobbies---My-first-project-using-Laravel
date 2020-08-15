@@ -41,8 +41,24 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nome' => 'required|min:4',
+            'cpf' => 'required|min:14',
+            'rg' => 'required|min:9',
+            'nasc' => 'required',
+            'cep' => 'required|min:9',
+            'rua' => 'required|min:5',
+            'bairro' => 'required',
+            'cidade' => 'required',
+            'estado' => 'required',
+            'numero' => 'required|min:1',
+        ]);
+        $cliente = new Hobby([
+            'nome' => $request->nome,
+            'description' => $request->description
+        ]);
         return $this->index()->with([
-            'message_success'=> "O cliente <b>".$request->name. "</b> foi criado."
+            'message_success'=> "O cliente <b>".$cliente->nome. "</b> foi cadastrado."
         ]);
     }
 

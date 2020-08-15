@@ -7,8 +7,16 @@
             <div class="card">
                 <div class="card-header">{{ __('Detalhes Cliente') }}</div>
                     <div class="card-body">
-                        <b>{{$cliente->nome}}</b>
-                        <p>{{$cliente->cpf}}</p>
+                        <b>Nome: {{$cliente->nome}}</b>
+                        <p>Cpf: {{$cliente->cpf}}</p>
+                        <p>Rg: {{$cliente->rg}}</p>
+                        <p>Nasc: {{$cliente->nasc}}</p>
+                        <p>Cep: {{$cliente->cep}}</p>
+                        <p>Rua: {{$cliente->rua}}</p>
+                        <p>Bairro: {{$cliente->bairro}}</p>
+                        <p>Cidade: {{$cliente->cidade}}</p>
+                        <p>Estado: {{$cliente->estado}}</p>
+                        <p>Numero: {{$cliente->numero}}</p>
                     </div>
             </div>
             <div class="mt-2">

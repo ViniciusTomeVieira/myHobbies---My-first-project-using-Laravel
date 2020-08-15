@@ -30,10 +30,15 @@
                     @method('GET')
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input type="text" class="form-control{{$errors->has('id') ? ' border-danger' : '' }}" id="id" name="id" value="{{old('id')}}">
+                        <input type="text" class="form-control{{$errors->has('id') ? ' border-danger' : '' }}" id="idCliente" name="idCliente" value="">
                         <small class="form-text text-danger">{!! $errors->first('id') !!}</small>
                     </div>
-                    <input id="enviar" class="btn btn-primary mt-4" type="submit" value="Pesquisar Cliente">
+                    <input id="enviar" class="btn btn-primary mt-4" type="button" value="Pesquisar Cliente" onclick="pesquisarCliente()">
+                    <div class="form-group mt-4">
+                        <label for="id">Cliente</label>
+                        <input type="text" class="form-control{{$errors->has('id') ? ' border-danger' : '' }}" id="result" name="result" value="" readonly=“true”>
+                        <small class="form-text text-danger">{!! $errors->first('id') !!}</small>
+                    </div>
                 </div>
         </div>
         <div class="mt-2">

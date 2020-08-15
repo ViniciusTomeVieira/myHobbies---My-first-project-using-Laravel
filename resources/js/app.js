@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 require('./custom');
+require('./jquery-3.5.1.min')
+require('./jquery.mask.min')
 
 window.Vue = require('vue');
 
@@ -31,3 +33,9 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 const app = new Vue({
     el: '#app',
 });
+// resources/assets/js/app.js
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+
+

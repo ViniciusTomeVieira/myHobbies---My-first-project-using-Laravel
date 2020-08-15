@@ -23,7 +23,6 @@
             $('#cep').mask('00000-000');
             $('#numero').mask('00000');
             $('#numero').prop("disabled", true);
-
         });
 
         function pesquisarCliente(){
@@ -38,7 +37,12 @@
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
                         cliente = JSON.parse(this.responseText);
-                        document.getElementById('result').value = cliente.nome
+                        if(cliente != null){
+                            document.getElementById('result').value = cliente.nome + "  Cpf: " + cliente.cpf
+                        }else{
+                            document.getElementById('result').value = "Cliente não encontrado"
+                        }
+                        
                     }
                 };
                 xhttp.open("POST", "http://localhost:4000/clientes/search", true);
@@ -123,6 +127,7 @@
                 return false;		
             return true;   
         }
+
         function pesquisacep(valor) {
 
         //Nova variável "cep" somente com dígitos.
@@ -167,7 +172,20 @@
         }
         };
             
-        
+        function UserActionGet(){
+            var xhttp = new XMLHttpRequest();
+            let clientes = []
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        clientes = JSON.parse(this.responseText);
+                        document.getElementById("listaClientes").value = clientes
+                    }
+                };
+                xhttp.open("GET", "http://localhost:4000/clientes", true);
+                xhttp.setRequestHeader("Content-type", "application/json");
+                xhttp.send()
+            }
+
         function UserActionPost(){
             var xhttp = new XMLHttpRequest();
 
@@ -185,10 +203,9 @@
 
             var myJson = JSON.stringify(json);
 
-            var result = JSON.parse(JSON.stringify(json))
                 xhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        alert(this.responseText);
+                        alert("Dados enviados com sucesso");
                     }
                 };
                 xhttp.open("POST", "http://localhost:4000/clientes", true);

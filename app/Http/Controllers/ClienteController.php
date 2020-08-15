@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Cliente;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ClienteController extends Controller
 {
@@ -53,12 +52,8 @@ class ClienteController extends Controller
             'estado' => 'required',
             'numero' => 'required|min:1',
         ]);
-        $cliente = new Hobby([
-            'nome' => $request->nome,
-            'description' => $request->description
-        ]);
         return $this->index()->with([
-            'message_success'=> "O cliente <b>".$cliente->nome. "</b> foi cadastrado."
+            'message_success'=> "O cliente <b>".$request->nome. "</b> foi cadastrado."
         ]);
     }
 
@@ -111,7 +106,7 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         return $this->index()->with([
-            'message_success'=> "O cliente <b>".$cliente->nome. "</b> foi deletado."
+            'message_success'=> "O cliente foi deletado."
         ]);
     }
 }

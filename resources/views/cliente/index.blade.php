@@ -30,7 +30,7 @@
                     @method('GET')
                     <div class="form-group">
                         <label for="id">ID</label>
-                        <input type="text" class="form-control{{$errors->has('id') ? ' border-danger' : '' }}" id="idCliente" name="idCliente" value="">
+                        <input type="text" class="form-control{{$errors->has('id') ? ' border-danger' : '' }}" id="idCliente" name="idCliente" value=""  onclick="UserActionGet()">
                         <small class="form-text text-danger">{!! $errors->first('id') !!}</small>
                     </div>
                     <input id="enviar" class="btn btn-primary mt-4" type="button" value="Pesquisar Cliente" onclick="pesquisarCliente()">

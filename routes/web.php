@@ -26,6 +26,7 @@ Route::get('/test/{name}/{age}','HobbyController@index');
 */
 
 Route::resource('hobby','HobbyController');
+Route::resource('tag','TagController');
 Route::resource('cliente','ClienteController');
 
 Auth::routes();

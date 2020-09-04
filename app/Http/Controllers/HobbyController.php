@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Hobby;
+use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HobbyController extends Controller
 {
@@ -12,9 +14,15 @@ class HobbyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+        $this->middleware('auth')->except(['index','show']);
+    }
     public function index()
     {
-        $hobbies = Hobby::all();
+        //$hobbies = Hobby::all();
+
+        //$hobbies = Hobby::paginate(10);
+        $hobbies = Hobby::orderBy('created_at','DESC')->paginate(10);
         return view('hobby.index')->with([
             'hobbies' => $hobbies
         ]);
@@ -44,7 +52,8 @@ class HobbyController extends Controller
         ]);
         $hobby = new Hobby([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'user_id' => auth()->id()
         ]);
         $hobby->save();
 
@@ -61,8 +70,13 @@ class HobbyController extends Controller
      */
     public function show(Hobby $hobby)
     {
+        $allTags = Tag::all();
+        $usedTags = $hobby->tags;
+        $availableTags = $allTags->diff($usedTags);
         return view('hobby.show')->with([
-            'hobby' => $hobby
+            'hobby' => $hobby,
+            'availableTags' => $availableTags,
+            'message_success' => Session::get('message_success')
         ]);
     }
 

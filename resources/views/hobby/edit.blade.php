@@ -7,13 +7,24 @@
                 <div class="card">
                     <div class="card-header">Edit Hobby</div>
                     <div class="card-body">
-                        <form action="/hobby/{{$hobby->id}}" method="post">
+                        <form autocomplete="off" action="/hobby/{{$hobby->id}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control{{$errors->has('name') ? ' border-danger' : '' }}" id="name" name="name" value="{{$hobby->name ?? old('name')}}">
                                 <small class="form-text text-danger">{!! $errors->first('name') !!}</small>
+                            </div>
+                            @if(file_exists('images/hobbies/'. $hobby->id . '_large.jpg'))
+                            <div class="mb-2">             
+                                <img style="max-width: 400px; max-height: 300px;" src="/images/hobbies/{{$hobby->id}}_large.jpg" alt="">                              
+                                <a class="btn btn-outline-danger float-right" href="/delete-images/hobby/{{$hobby->id}}">Delete image</a>
+                            </div>
+                            @endif
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file" class="form-control{{$errors->has('image') ? ' border-danger' : '' }}" id="image" name="image" >
+                                <small class="form-text text-danger">{!! $errors->first('image') !!}</small>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>

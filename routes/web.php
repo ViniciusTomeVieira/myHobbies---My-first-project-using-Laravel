@@ -38,3 +38,5 @@ Route::view('ajax','cliente');
 
 Route::get('/hobby/{hobby_id}/tag/{tag_id}/attach', 'HobbyTagController@attachTag');
 Route::get('/hobby/{hobby_id}/tag/{tag_id}/detach', 'HobbyTagController@detachTag');
+Route::get('/delete-images/hobby/{hobby_id}', 'HobbyController@deleteImages');
+Route::get('/delete-images/user/{user_id}', 'UserController@deleteImages');

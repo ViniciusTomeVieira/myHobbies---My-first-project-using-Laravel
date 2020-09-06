@@ -18,7 +18,12 @@
                                     @if($user->hobbies->count() > 0)
                                         @foreach($user->hobbies as $hobby)
                                             <li class="list-group-item">
-                                                <a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
+                                            @if(file_exists('images/hobbies/'. $hobby->id . '_thumb.jpg'))
+                                    <a title="Show Details" href="/hobby/{{ $hobby->id }}">
+                                        <img src="/images/hobbies/{{$hobby->id}}_thumb.jpg" alt="Hobby Thumb">
+                                    </a>
+                                @endif
+                                &nbsp;<a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
                                                 <span class="float-right mx-2">{{ $hobby->created_at->diffForHumans() }}</span>
                                                 <br>
                                                 @foreach($hobby->tags as $tag)
@@ -34,7 +39,15 @@
                                 @endif
                             </div>
                             <div class="col-md-3">
-                                <img class="img-thumbnail" src="/img/300x400.jpg" alt="{{ $user->name }}">
+                                
+                                @if(Auth::user() && file_exists('images/users/'. $user->id . '_large.jpg'))
+                                <a href="/images/users/{{$hobby->id}}_large.jpg" data-lightbox="images/users/{{$user->id}}_large.jpg" data-title="{{ $user->name }}">
+                                    <img class="img-thumbnail" src="/images/users/{{$user->id}}_large.jpg" alt="{{ $user->name }}">
+                                </a>
+                                @endif
+                            @if(!Auth::user() && file_exists('images/users/'. $user->id . '_pixelated.jpg'))
+                                    <img class="img-thumbnail" src="/images/users/{{$user->id}}_pixelated.jpg" alt="{{ $user->name }}">                              
+                                @endif
                             </div>
                         </div>
 
